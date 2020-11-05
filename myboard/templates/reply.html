@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+window.onload = function(){
+	document.getElementById("btnReplyOk").onclick = function(){
+		chkFunc();
+	}
+}
+
+function chkFunc(){
+	if (frm.name.value === '' || frm.passwd.value === ''){
+		alert('입력자료를 모두 채우시오');
+		return ;
+	}
+	frm.submit();
+}
+</script>
+</head>
+<body>
+<h2>* 댓글 입력 *</h2>
+<form action="/board/replyok/" name="frm" method="post">{%csrf_token%}
+<input type="hidden" name="id" value="{{data_one.id}}">
+<input type="hidden" name="gnum" value="{{data_one.gnum}}">
+<input type="hidden" name="onum" value="{{data_one.onum}}">
+<input type="hidden" name="nested" value="{{data_one.nested}}">
+
+<table style="width: 70%">
+<tr>
+<td>작성자 : </td>
+<td><input type="text" name="name" placeholder="이름 입력"></td>
+</tr>
+
+<tr>
+<td>비밀번호 : </td>
+<td><input type="text" name="passwd"></td>
+</tr>
+
+<tr>
+<td>이메일 : </td>
+<td><input type="email" name="mail"></td>
+</tr>
+
+<tr>
+<td>글 제목 : </td>
+<td><input type="text" name="title" size="49" value="[RE]{{data_one.title}}"></td>
+</tr>
+
+<tr>
+<td>글 내용 : </td>
+<td><textarea rows="5" cols="50" name="cont"></textarea></td>
+</tr>
+
+<tr>
+<td colspan = "2"><input type="button" value = "댓 글 등 록" id= "btnReplyOk"></td>
+
+</tr>
+</table>
+</form>
+</body>
+</html>
